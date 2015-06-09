@@ -1,0 +1,42 @@
+{
+  "name": "task-runner",
+  "description": "Provides a simple interface for a single-exchange, single-queue message pattern",
+  "version": "0.0.1",
+  "author": {
+    "name": "Israel Shirk",
+    "email": "israelshirk@gmail.com"
+  },
+  "license": "GPL-3.0",
+  "keywords": [
+    "devops",
+    "task",
+    "chatops"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/israelshirk/js-task-runner"
+  },
+  "bugs": {
+    "url": "https://github.com/israelshirk/js-task-runner/issues"
+  },
+  "dependencies": {
+    "coffee-script": "*",
+    "q": "^1.4.1",
+    "simple-message-helper": "*",
+    "string-format": "^0.5.0",
+    "underscore": "*",
+    "underscore.string": "*"
+  },
+  "devDependencies": {
+    "jasmine-node": "mhevery/jasmine-node#Jasmine2.0"
+  },
+  "scripts": {
+    "test": "node_modules/jasmine-node/bin/jasmine-node --coffee spec"
+  },
+  "maintainers": [
+    {
+      "name": "israelshirk",
+      "email": "israelshirk@gmail.com"
+    }
+  ]
+}
