@@ -14,10 +14,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/israelshirk/js-task-runner"
+    "url": "git://github.com/israelshirk/task-runner"
   },
   "bugs": {
-    "url": "https://github.com/israelshirk/js-task-runner/issues"
+    "url": "https://github.com/israelshirk/task-runner/issues"
   },
   "dependencies": {
     "coffee-script": "*",
