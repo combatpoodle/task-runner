@@ -17,10 +17,10 @@ describe 'ping', ->
 
   beforeEach ->
     class parentClass
-      registerCallbacks: (child, nonce) ->
+      registerCallback: (child, nonce) ->
         # console.log("registercallbacks with", child, nonce)
-      unRegisterCallbacks: (nonce) ->
-        # console.log("unRegisterCallbacks with", nonce)
+      unRegisterCallback: (nonce) ->
+        # console.log("unRegisterCallback with", nonce)
       send: (payload) ->
         # console.log("sendpayload with", payload)
       notify: (message) ->
@@ -29,8 +29,8 @@ describe 'ping', ->
     parent = new parentClass()
 
     spyOn(parent, "send").and.callThrough()
-    spyOn(parent, "registerCallbacks").and.callThrough()
-    spyOn(parent, "unRegisterCallbacks").and.callThrough()
+    spyOn(parent, "registerCallback").and.callThrough()
+    spyOn(parent, "unRegisterCallback").and.callThrough()
     spyOn(parent, "notify").and.callThrough()
 
     pingClass = require('../src/ping')
@@ -77,8 +77,8 @@ describe 'ping', ->
     finalChecks = ->
       expect(pingCompleted).toEqual(true)
       expect(pingCompleted).not.toBeUndefined()
-      expect(parent.registerCallbacks).toHaveBeenCalledWith(ping, pingPayload.nonce)
-      expect(parent.unRegisterCallbacks).toHaveBeenCalledWith(pingPayload.nonce)
+      expect(parent.registerCallback).toHaveBeenCalledWith(ping, pingPayload.nonce)
+      expect(parent.unRegisterCallback).toHaveBeenCalledWith(pingPayload.nonce)
 
       _.each clientSet, (client) ->
         expect(parent.notify).toHaveBeenCalledWith("Received ping from " + client)
@@ -108,8 +108,8 @@ describe 'ping', ->
     jasmine.clock().tick(10000)
 
     finalChecks = ->
-      expect(parent.registerCallbacks).toHaveBeenCalledWith(ping, pingPayload.nonce)
-      expect(parent.unRegisterCallbacks).toHaveBeenCalledWith(pingPayload.nonce)
+      expect(parent.registerCallback).toHaveBeenCalledWith(ping, pingPayload.nonce)
+      expect(parent.unRegisterCallback).toHaveBeenCalledWith(pingPayload.nonce)
       expect(failedResponse.message).toEqual("Ping timed out")
 
       done()
