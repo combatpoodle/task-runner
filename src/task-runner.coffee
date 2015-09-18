@@ -3,16 +3,16 @@
 module.exports = (MessageHelper, Ping, Task) ->
     # Mock injection
     if !MessageHelper
-        MessageHelper = require 'message-helper'
+        MessageHelper = require('message-helper')()
 
     format = require 'string-format'
     _ = require 'underscore'
     q = require 'q'
 
     if not Ping
-        Ping = require 'ping'
+        Ping = require('./ping')
     if not Task
-        Task = require 'task'
+        Task = require('./task')
 
     class TaskRunner
         # See task-runner.spec.coffee for examples of the function taskParams
@@ -75,7 +75,7 @@ module.exports = (MessageHelper, Ping, Task) ->
         _errorCallback: (message) ->
             @_sendError "Message queue connection dropped; automatic reconnect should kick in momentarily..."
 
-            if not message.nonce
+            if not message or not message.nonce
                 return
 
             if not @_callbacks[message.nonce]
@@ -97,7 +97,7 @@ module.exports = (MessageHelper, Ping, Task) ->
             @_sendMessage message
 
         _ping: ->
-            ping = new Ping @_clientSet, @, @_taskParams
+            ping = new Ping @_clients, @, @_taskParams
 
             return ping.run()
 

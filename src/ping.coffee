@@ -18,18 +18,18 @@ class Ping
     run: ->
         @_defer = q.defer()
 
-        @_parent.registerCallbacks(this, @_nonce)
+        @_parent.registerCallback(this, @_nonce)
 
         @_sendPing()
 
         return @_defer.promise.timeout(@timeout, "Ping timed out").then (@_done).bind(@), (@_doneWithFailure).bind(@)
 
     _done: (thing) ->
-        @_parent.unRegisterCallbacks(@_nonce)
+        @_parent.unRegisterCallback(@_nonce)
         return q.resolve(thing)
 
     _doneWithFailure: (thing) ->
-        @_parent.unRegisterCallbacks(@_nonce)
+        @_parent.unRegisterCallback(@_nonce)
         throw thing
 
     _sendPing: ->
